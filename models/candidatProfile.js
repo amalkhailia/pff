@@ -45,7 +45,7 @@ const candidatSchema = new Schema({
         type: String,
         required: true
     },
-    nom_deplome:{
+    nom_diplome:{
         type: String,
         required: true
     }, 

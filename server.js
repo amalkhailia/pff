@@ -18,7 +18,11 @@ app.use(express.json())
 
 // import routes
 app.use('/api/candidat',require('./routes/candidatProfile'))
-app.use('/api/authCandidat',require('./routes/authCandidat'))
+app.use('/api/user',require('./routes/User'))
+app.use('/api/recruteur',require('./routes/Recruteur'))
+app.use('/api/offre',require('./routes/offre'))
+
+
 
 // 3-port
 const PORT = process.env.PORT
