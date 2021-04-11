@@ -1,31 +1,39 @@
 const jwt = require("jsonwebtoken");
-const User = require("../models/User")
-const isAuthUser = async(req,res,next)=>{
-    try {
- // test token
- const token = req.headers["authorization"];
-// if the token is undefined =>
+const User = require("../models/User");
 
-if (!token) {
-  return res.status(400).send({ errors: [{ msg: "you are not authorized" }] });
-}
-// get the id from the token
-const decoded = await jwt.verify(token, process.env.SECRET_KEY);
+const isAuthUser = async (req, res, next) => {
+  try {
+    // test token
+    const token = req.headers["authorization"];
+    // if the token is undefined =>
 
-// search the user
-const user = await User.findById(decoded.id).select("-password");
+    if (!token) {
+      return res
+        .status(400)
+        .send({ errors: [{ msg: "you are not authorized" }] });
+    }
+    // get the id from the token
+    const decoded = await jwt.verify(token, process.env.SECRET_KEY);
 
-// send not authorisation IF NOT USER
-if (!user) {
-  return res.status(400).send({ errors: [{ msg: "you are not authorized" }] });
-}
+    // search the user
+    const user = await User.findById(decoded.id).select("-password");
 
-// if user exist
-req.user = user;
+    // send not authorisation IF NOT USER
+    if (!user) {
+      return res
+        .status(400)
+        .send({ errors: [{ msg: "you are not authorized" }] });
+    }
 
-next();
-} catch (error) {
-return res.status(500).send({ errors: [{ msg: "you are not authorized" }] });
-}};
+    // if user exist
+    req.user = user;
 
-module.exports = isAuthUser
+    next();
+  } catch (error) {
+    return res
+      .status(500)
+      .send({ errors: [{ msg: "you are not authorized" }] });
+  }
+};
+
+module.exports = isAuthUser;

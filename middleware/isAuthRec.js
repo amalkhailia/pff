@@ -1,31 +1,41 @@
 const jwt = require("jsonwebtoken");
-const Recruteur = require("../models/Recruteur")
-const isAuthRec = async(req,res,next)=>{
-    try {
- // test token
- const token = req.headers["authorization"];
-// if the token is undefined =>
+const Recruteur = require("../models/Recruteur");
+const Offre = require("../models/offre");
 
-if (!token) {
-  return res.status(400).send({ errors: [{ msg: "you are not authorized" }] });
-}
-// get the id from the token
-const decoded = await jwt.verify(token, process.env.SECRET_KEY);
+const isAuthRec = async (req, res, next) => {
+  try {
+    // test token
+    const token = req.headers["authorization"];
+    // if the token is undefined =>
 
-// search the user
-const recruteur = await Recruteur.findById(decoded.id).select("-password");
+    if (!token) {
+      return res
+        .status(400)
+        .send({ errors: [{ msg: "you are not authorized" }] });
+    }
+    // get the id from the token
+    const decoded = await jwt.verify(token, process.env.SECRET_KEY);
 
-// send not authorisation IF NOT USER
-if (!recruteur) {
-  return res.status(400).send({ errors: [{ msg: "you are not authorized" }] });
-}
+    // search the user
+    const recruteur = await Recruteur.findById(decoded.id)
+    .select("-password");
 
-// if user exist
-req.recruteur = recruteur;
+    // send not authorisation IF NOT USER
+    if (!recruteur) {
+      return res
+        .status(400)
+        .send({ errors: [{ msg: "you are not authorized" }] });
+    }
 
-next();
-} catch (error) {
-return res.status(500).send({ errors: [{ msg: "you are not authorized" }] });
-}};
+    // if user exist
+    req.recruteur = recruteur;
 
-module.exports = isAuthRec
+    next();
+  } catch (error) {
+    return res
+      .status(500)
+      .send({ errors: [{ msg: "you are not authorized" }] });
+  }
+};
+
+module.exports = isAuthRec;
