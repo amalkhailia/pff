@@ -41,9 +41,7 @@ exports.DeleteOneOffre = async (req, res) => {
       return;
     }
   } catch (error) {
-    res
-      .status(400)
-      .send({ msg: `can not find the candidat to delete ${error}` });
+    res.status(400).send({ msg: `can not find the ad to delete ${error}` });
   }
 };
 exports.UpdateOneOffre = async (req, res) => {

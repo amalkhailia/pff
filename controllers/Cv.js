@@ -92,3 +92,11 @@ exports.UpdateOneCv = async (req, res) => {
     res.status(400).send({ msg: `can not edit this cv ${error}` });
   }
 };
+/*exports.addOffreToCv = async (CvId, ad) => {
+  try {
+    await Cv.updateOne({ _id: CvId }, { $push: { ads: ad._id } });
+    res.status(200).send("saved");
+  } catch (error) {
+    console.log("can not save");
+  }
+};*/

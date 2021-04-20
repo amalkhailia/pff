@@ -6,6 +6,7 @@ const {
   signinRec,
   getOneRec,
   getAllRec,
+  DeleteOneRec,
 } = require("../controllers/Recruteur");
 const isAuthRec = require("../middleware/isAuthRec");
 
@@ -23,5 +24,6 @@ router.post("/signinrec", signinValidation(), validation, signinRec);
 router.get("/", getAllRec);
 
 router.get("/currentRecruteur", isAuthRec, getOneRec);
+router.delete("/:id", DeleteOneRec);
 
 module.exports = router;

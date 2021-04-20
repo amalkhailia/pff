@@ -88,3 +88,28 @@ exports.getOneUser = async (req, res) => {
     res.status(400).send({ msg: `can not find the user ${error}` });
   }
 };
+
+//getAllRec
+
+exports.getAllUsers = async (req, res) => {
+  try {
+    const listUsers = await User.find();
+    res.status(200).send({ msg: "users list...", listUsers });
+  } catch (error) {
+    res.status(400).send({ msg: `can not find list of users ${error}` });
+  }
+};
+
+exports.DeleteOneUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const userToDelete = await User.findOneAndDelete({ _id: id });
+    res.status(200).send({ msg: "user is deleted...", userToDelete });
+    if (!userToDelete) {
+      res.status(400).send({ msg: `user already deleted ${error}` });
+      return;
+    }
+  } catch (error) {
+    res.status(400).send({ msg: `can not find the user to delete ${error}` });
+  }
+};

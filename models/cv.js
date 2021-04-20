@@ -42,5 +42,6 @@ const CvSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "user",
   },
+  ads: [{ type: Schema.Types.ObjectId, ref: "" }],
 });
 module.exports = Cv = mongoose.model("Cv", CvSchema);

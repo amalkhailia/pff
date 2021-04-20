@@ -19,6 +19,7 @@ const UserSchema = new Schema({
     required: true,
   },
   role: { type: String, default: "user" },
+
   cv: { type: Schema.Types.ObjectId, ref: "Cv" },
 });
 

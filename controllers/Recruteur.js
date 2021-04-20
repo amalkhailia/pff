@@ -106,3 +106,19 @@ exports.getOneRec = async (req, res) => {
     res.status(400).send({ msg: `can not find the recruteur ${error}` });
   }
 };
+
+exports.DeleteOneRec = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const recToDelete = await Recruteur.findOneAndDelete({ _id: id });
+    res.status(200).send({ msg: "recruteur is deleted...", recToDelete });
+    if (!recToDelete) {
+      res.status(400).send({ msg: `recruteur already deleted ${error}` });
+      return;
+    }
+  } catch (error) {
+    res
+      .status(400)
+      .send({ msg: `can not find the recruteur to delete ${error}` });
+  }
+};

@@ -1,7 +1,12 @@
 // express require
 const express = require("express");
 const router = express.Router();
-const { signinCand, signupCand, getOneUser } = require("../controllers/User");
+const {
+  signinCand,
+  signupCand,
+  getAllUsers,
+  DeleteOneUser,
+} = require("../controllers/User");
 const isAuthUser = require("../middleware/isAuthUser");
 const {
   registerValidation,
@@ -24,4 +29,8 @@ router.get("/currentUser", isAuthUser, async (req, res) => {
     res.status(500).send(error);
   }
 });
+
+router.get("/", getAllUsers);
+router.delete("/:id", DeleteOneUser);
+
 module.exports = router;

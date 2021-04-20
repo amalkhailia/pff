@@ -20,7 +20,6 @@ app.use("/api/user", require("./routes/User"));
 app.use("/api/recruteur", require("./routes/Recruteur"));
 app.use("/api/offre", require("./routes/offre"));
 app.use("/api/Cv", require("./routes/cv"));
-app.use("/api/admin", require("./routes/admin"));
 
 // 3-port
 const PORT = process.env.PORT;

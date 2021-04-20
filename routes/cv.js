@@ -27,4 +27,6 @@ router.delete("/:id", controllers.DeleteOneCv);
 //edit Cv
 router.put("/:id", controllers.UpdateOneCv);
 
+//router.put("/:id", controllers.addOffreToCv);
+
 module.exports = router;
