@@ -29,10 +29,13 @@ const offreSchema = new Schema({
     type: String,
     required: true,
   },
+  email: {
+    type: String,
+    required: true,
+  },
   id_rec: {
     type: Schema.Types.ObjectId,
     ref: "recruteur",
   },
-  candidats: [{ type: Schema.Types.ObjectId, ref: "Cv" }],
 });
 module.exports = offre = mongoose.model("offre", offreSchema);

@@ -7,6 +7,7 @@ exports.offreValidation = () => [
   check("adresse", "adress is required").not().isEmpty(),
   check("poste", "poste is required").not().isEmpty(),
   check("domaine", "domain is required").not().isEmpty(),
+  check("email", "enter a valid email").isEmail(),
 ];
 
 exports.validation = (req, res, next) => {
